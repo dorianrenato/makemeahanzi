@@ -1,0 +1,121 @@
+<div>
+	<style>
+		.card {
+		font-family: arial;
+		font-size: 35px;
+		text-align: center;
+		}
+		hr.style1{
+		border-top: 1px solid #8c8b8b;
+		}
+		.sentencesDivClass{
+		font-size: 16px;
+		}
+		br {
+		display: block;
+		margin: 10px 0;
+		line-height: 30%;
+		}
+		hr {
+		display: block;
+		margin: 10px 0;
+		line-height: 30%;
+		}
+
+		ul#hanziAnimations li {
+		display: inline-block;
+		}
+		.hanziSvgObject {
+		height: 80px;
+		background-color: white;
+		}
+		.hanziAnimationClass{
+		margin: auto;
+		}
+		.replayButton {
+		font-family: arial;
+		font-size: 11px;
+		text-align: center;
+		}
+		p{
+		margin: 0px 0px 0px 0px !important;
+		}
+		ul{
+		padding: 0px;
+		}
+	</style>
+
+
+<div id="qa_box" class="card card2">
+	<div id="qa" style="zoom: 1;">
+		谁
+		<div style="zoom: 1;">
+			<hr id="answer" style="zoom: 1;"/>
+				shéi
+			<br style="zoom: 1;"/>
+				who, whom
+			<hr class="style1" style="zoom: 1;"/>
+			<div class="sentencesDivClass" style="zoom: 1;">
+				这是谁的照片? 
+				<br style="zoom: 1;"/>
+				<div id="sentenceSeparator" style="zoom: 1;"/> 
+				这是五口人，还有谁? (Who else?)
+			</div>
+
+			<hr id="answer" style="zoom: 1;"/>
+			<div style="zoom: 1;">
+
+				<div style="zoom: 1;">
+					<ul id="hanziAnimations" style="zoom: 1;">
+
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<br>
+		</div>
+	</div>
+	
+	<script>
+	var hanzis = document.getElementById("hanziAnimations");
+
+	hanziNumbers = "19969,21147,27874";
+	var hanziArray = hanziNumbers.split(',');
+
+	for(var i = 0; i < hanziArray.length; i++) {
+		hanziArray[i] = hanziArray[i].replace(/^\s*/, "").replace(/\s*$/, "");
+		var li = document.createElement("li");
+		li.insertAdjacentHTML("beforeEnd",
+		'<div class="hanziAnimationClass" style="center;" height="200">'
+			+
+			'<object class="hanziSvgObject" id="'+hanziArray[i]+'Anim" type="image/svg+xml" data="'+hanziArray[i]+'.svg"/>'
+			+
+			'<p style=" text-align: center;"><button id="'+hanziArray[i]+'" class="replayButton">Replay</button></p>'
+			+
+			'</div>'
+		);
+		hanzis.appendChild(li);
+	}
+
+	var x = document.getElementsByClassName("example");
+	var i;
+	for (i = 0; i < x.length; i++) {
+		x[i].style.backgroundColor = "red";
+	}
+
+	var x = document.getElementsByClassName("replayButton");
+	var i;
+	for (i = 0; i < x.length; i++) {
+		x[i].addEventListener("click",rePlayHanzi, false);
+	}
+
+	function rePlayHanzi(event) {
+		hanziId = event.target.id
+		var element = document.getElementById(hanziId+'Anim');
+		var cloneElement = element.cloneNode(true);
+		element.parentNode.replaceChild(cloneElement, element); 
+	}
+	</script>
+</div>
+												
